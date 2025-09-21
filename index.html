@@ -2,17 +2,47 @@
 <html>
 <head>
     <title>Profil Diri</title>
-</head>
+    <style type="text/css">
+        #boxof {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px; 
+            border: 3px solid black;
+            padding: 20px;
+            margin: 30px auto;
+            width: fit-content; 
+            background: #f9f9f9;
+        }
 
-<frameset rows="150px,50px,*,20px">
-    <frame name="header" src="" scrolling="no">
-    <frame name="nav" src="" scrolling="no">
-    <frameset cols="100px,*">
-        <frame name="kiri" src="" scrolling="no">
-        <frame name="kanan" src="b.html" scrolling="yes">
-    </frameset>
-    <frame name="footer" src="" scrolling="no">
-</frameset>
+        .box {
+            text-align: center;
+            width: 200px; 
+        }
+
+        .title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: white;
+            text-shadow:
+                -1px -1px 0 black,
+                 1px -1px 0 black,
+                -1px  1px 0 black,
+                 1px  1px 0 black; 
+        }
+
+        .img {
+            width: 200px;  
+            height: 200px;
+            object-fit: contain; 
+            opacity: 0.4;   
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
 
 <body>
 
@@ -202,5 +232,29 @@
         </table>
     </div>
 
+    <br>
+    <br>
+
+    <div>
+        <h2 style="text-align: center;">Portofolio</h2>
+        <div id="boxof">
+            <div class="box">
+                <div class="title">HTML</div>
+                <img src="gmbrhtml.png" alt="HTML" class="img">
+            </div>
+            <div class="box">
+                <div class="title">CSS</div>
+                <img src="gmbrcss.png" alt="CSS" class="img">
+            </div>
+            <div class="box">
+                <div class="title">PHP</div>
+                <img src="gmbrphp.png" alt="PHP" class="img">
+            </div>
+            <div class="box">
+                <div class="title">JAVASCRIPT</div>
+                <img src="gmbrjs.png" alt="JavaScript" class="img">
+            </div>
+        </div>
+    </div>
 </body>
 </html>
