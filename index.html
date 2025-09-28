@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Profil Diri</title>
-    <style type="text/css">
+        <title>Profil Diri</title>
+        <style type="text/css">
         #boxof {
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            gap: 30px; 
+            gap: 30px;
             border: 3px solid black;
             padding: 20px;
             margin: 30px auto;
-            width: fit-content; 
+            width: fit-content;
             background: #f9f9f9;
         }
 
         .box {
             text-align: center;
-            width: 200px; 
+            width: 200px;
         }
 
         .title {
@@ -25,22 +26,50 @@
             font-weight: bold;
             margin-bottom: 10px;
             color: white;
-            text-shadow:
-                -1px -1px 0 black,
-                 1px -1px 0 black,
-                -1px  1px 0 black,
-                 1px  1px 0 black; 
+            text-shadow: -1px -1px 0 black,
+                1px -1px 0 black,
+                -1px 1px 0 black,
+                1px 1px 0 black;
         }
 
         .img {
-            width: 200px;  
+            width: 200px;
             height: 200px;
-            object-fit: contain; 
-            opacity: 0.4;   
+            object-fit: contain;
+            opacity: 0.4;
             display: block;
             margin: 0 auto;
         }
 
+        /* CSS BARU UNTUK FORM REGISTRASI & DROPDOWN */
+        .autocomplete-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            z-index: 99;
+            top: 100%;
+            left: 0;
+            right: 0;
+            max-height: 150px;
+            overflow-y: auto;
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
     </style>
 </head>
 
@@ -175,6 +204,10 @@
         </table>
     </div>
 
+
+
+
+
     <div>
         <h2 align="center">Form Registrasi</h2>
         <table align="center">
@@ -232,9 +265,6 @@
         </table>
     </div>
 
-    <br>
-    <br>
-
     <div>
         <h2 style="text-align: center;">Portofolio</h2>
         <div id="boxof">
@@ -256,5 +286,210 @@
             </div>
         </div>
     </div>
+
+    <div>
+        <br>
+        <h2 align="center">Form Registrasi Mahasiswa</h2>
+        <table align="center">
+            <form method="post" id="form-registrasi-baru">
+                <tr>
+                    <th align="left">
+                        <label for="nama_mahasiswa">Nama Mahasiswa:</label><br>
+                        <div class="autocomplete-container">
+                            <input type="text" id="nama_mahasiswa" name="nama_mahasiswa" size="50" autocomplete="off"
+                                required>
+                            <div id="autocomplete-nama" class="autocomplete-items"></div>
+                        </div>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="left">
+                        <label for="nim">NIM:</label><br>
+                        <input type="text" id="nim" name="nim" size="50" required pattern="[0-9]{8,12}">
+                    </th>
+                </tr>
+                <tr>
+                    <th align="left">
+                        <label for="mata_kuliah">Mata Kuliah:</label><br>
+                        <input type="text" id="mata_kuliah" name="mata_kuliah" size="50" required>
+                    </th>
+                </tr>
+                <tr>
+                    <th align="left">
+                        <label for="dosen">Dosen:</label><br>
+                        <input type="text" id="dosen" name="dosen" size="50" required>
+                    </th>
+                </tr>
+                <tr>
+                    <th>
+                        <button type="submit" style="width: 370px;">Daftar</button>
+                    </th>
+                </tr>
+            </form>
+        </table>
+    </div>
+    
+
+    <div>
+        <label for="provinsi">Provinsi:</label>
+        <select id="provinsi">
+            <option value="jawa_timur">Jawa Timur</option>
+        </select>
+
+        <br><br>
+
+        <label for="kota">Kota/Kabupaten:</label>
+        <select id="kota">
+            <option value="surabaya">Surabaya</option>
+        </select>
+
+        <br><br>
+
+        <label for="kecamatan">Masukkan Kode Pos:</label><br>
+        <input type="text" id="kecamatan">
+        <button onclick="cariKodePos()">Cari</button>
+
+        <br><br>
+
+        <div id="hasil"></div>
+    </div>
+
+    <div>
+        <br>
+        <h2 align="center">Dynamic Dropdown List</h2>
+        <table align="center">
+            <tr>
+                <th align="left">
+                    <label for="produk">Pilih Jenis Produk:</label><br>
+                    <select id="produk">
+                        <option value="">-- Pilih Jenis Produk --</option>
+                        <option value="laptop">Laptop</option>
+                        <option value="smartphone">Smartphone</option>
+                        <option value="desktop">Desktop</option>
+                        <option value="console">Console</option>
+                    </select>
+                </th>
+            </tr>
+            <tr>
+                <th align="left">
+                    <label for="merk">Pilih Merk:</label><br>
+                    <select id="merk">
+                        <option value="">-- Pilih Merk --</option>
+                    </select>
+                </th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        const daftarNamaMahasiswa = [
+            'Ahmad Fauzi', 'Budi Santoso', 'Citra Dewi', 'Dewi Susanti', 'Eka Putra',
+            'Fajar Kurniawan', 'Gita Permata', 'Hadi Wijaya', 'Ika Lestari', 'Joko Susilo',
+            'Faqih Ali Rabbani'
+        ];
+
+        const namaMahasiswaInput = document.getElementById('nama_mahasiswa');
+        const autocompleteContainer = document.getElementById('autocomplete-nama');
+        const formRegistrasi = document.getElementById('form-registrasi-baru');
+
+        namaMahasiswaInput.addEventListener('input', function () {
+            const inputValue = this.value.toLowerCase();
+            autocompleteContainer.innerHTML = '';
+
+            if (inputValue.length > 0) {
+                const rekomendasiTerfilter = daftarNamaMahasiswa.filter(nama =>
+                    nama.toLowerCase().includes(inputValue)
+                );
+
+                rekomendasiTerfilter.forEach(nama => {
+                    const div = document.createElement('div');
+                    div.textContent = nama;
+                    div.addEventListener('click', function () {
+                        namaMahasiswaInput.value = this.textContent;
+                        autocompleteContainer.innerHTML = '';
+                    });
+                    autocompleteContainer.appendChild(div);
+                });
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (e.target.id !== 'nama_mahasiswa') {
+                autocompleteContainer.innerHTML = '';
+            }
+        });
+
+        formRegistrasi.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const nim = document.getElementById('nim').value;
+            if (!/^[0-9]{8,12}$/.test(nim)) {
+                alert('NIM harus berisi 8 hingga 12 digit angka.');
+                return;
+            }
+            alert('Formulir registrasi berhasil dikirim!');
+            console.log('Data Formulir Registrasi:', {
+                nama_mahasiswa: document.getElementById('nama_mahasiswa').value,
+                nim: nim,
+                mata_kuliah: document.getElementById('mata_kuliah').value,
+                dosen: document.getElementById('dosen').value
+            });
+        });
+
+        const dataProduk = {
+            laptop: ['Acer', 'Asus', 'Dell', 'HP', 'Lenovo', 'Axioo', 'MSI'],
+            smartphone: ['Samsung', 'Apple', 'Xiaomi', 'Google Pixel', 'Oppo', 'Vivo'],
+            desktop: ['Apple', 'Dell', 'HP', 'Lenovo', 'MSI'],
+            console: ['Nintedo', 'PlayStation', 'XBOX']
+        };
+
+        const produkDropdown = document.getElementById('produk');
+        const merkDropdown = document.getElementById('merk');
+
+        produkDropdown.addEventListener('change', function () {
+            const produkTerpilih = this.value;
+
+            merkDropdown.innerHTML = '<option value="">-- Pilih Merk --</option>';
+
+            if (produkTerpilih) {
+                const merekUntukProduk = dataProduk[produkTerpilih];
+
+                merekUntukProduk.forEach(merk => {
+                    const option = document.createElement('option');
+                    option.value = merk.toLowerCase().replace(/\s/g, '-');
+                    option.textContent = merk;
+                    merkDropdown.appendChild(option);
+                });
+            }
+        });
+
+        const dataKodePosSurabaya = {
+        "60281": "gubeng" ,
+        "60111": "sukolilo",
+        "60262": "tegal sari",
+        "60136": "tambaksari",
+        "60195": "benowo",
+        "60243": "wonokromo",
+        "60123": "kenjeran" 
+    };
+
+    function cariKodePos() {
+        const inputKecamatan = document.getElementById('kecamatan').value.toLowerCase();
+        const hasilDiv = document.getElementById('hasil');
+
+        
+        hasilDiv.innerHTML = ''; 
+
+        if (inputKecamatan in dataKodePosSurabaya) {
+            const kodePos = dataKodePosSurabaya[inputKecamatan];
+            const output = `
+                <p><strong>Ditemukan:</strong> 1 hasil</p>
+                <p>Kode pos untuk  **${inputKecamatan.toUpperCase()}** adalah kecamatan **${kodePos}**.</p>
+            `;
+            hasilDiv.innerHTML = output;
+        } else {
+            hasilDiv.innerHTML = `<p>Tidak ada tempat yang ditemukan untuk "${inputKecamatan}".</p>`;
+        }
+    }
+    </script>
 </body>
+
 </html>
